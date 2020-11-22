@@ -1,0 +1,279 @@
+//hw 11 txt file - the preparation and mistakes and fixes
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+//hw 11
+public class Samples2 extends BaseUI {
+    @Test
+    public void test6() {
+        List<Integer> crunchifyList1 = new ArrayList<>(Arrays.asList(5, 10, 19));
+        System.out.println(crunchifyList1.size());
+        //output 3
+    }
+
+    @Test
+    public void test6a() {
+        List<Integer> crunchifyList2 = new ArrayList<>(Arrays.asList(5, 10, 19));
+        System.out.println((crunchifyList2.size()));
+        crunchifyList2.add(10);
+        System.out.println(crunchifyList2.size());
+        //output 4, one num added
+
+        for (int i = 0; i < crunchifyList2.size(); i++) {
+            int element = crunchifyList2.get(i);
+            System.out.println(element);
+            //output
+            //3
+            //4
+            //5
+            //10
+            //19
+            //10 <====added new value
+        }// for web elements
+    }
+
+    @Test
+    public void test6b() {
+        List<String> crunchifyList3 = new ArrayList<>(Arrays.asList("apple", "kiwi",
+                "orange"));
+        crunchifyList3.add("chicken");
+        System.out.println(crunchifyList3);
+        for (int i = 0; i < crunchifyList3.size(); i++) {
+            String element = crunchifyList3.get(i);
+            if (element.contains("chicken")) {      // contains some letterrs must be the same
+                System.out.println("chicken inside the List");
+            }
+        }
+    }
+
+    @Test
+    public void test6c() {
+        String phrase = "Chicken is inside list";
+        List<String> crunchifyList3 = new ArrayList<>(Arrays.asList("apple", "kiwi",
+                "orange"));
+        crunchifyList3.add("chicken");
+        System.out.println(crunchifyList3);
+
+        for (int i = 0; i < crunchifyList3.size(); i++) {
+            String element = crunchifyList3.get(i);
+            System.out.println(i + "iteration");
+            if (element.contains("en")) {      // contains some letterrs must be the same
+                System.out.println(phrase);
+            }
+        }
+    }
+//output
+//[apple, kiwi, orange, chicken]
+//0iteration
+//1iteration
+//2iteration
+//3iteration
+//Chicken is inside list
+
+    @Test
+    public void test6d() {
+        String phrase = "melon is inside the list";
+        List<String> crunchifyList4 = new ArrayList<>(Arrays.asList("apple", "kiwi",
+                "orange"));
+        crunchifyList4.add("melon");
+        System.out.println(crunchifyList4);
+        for (int i = 0; i < crunchifyList4.size(); i++) {
+            String element = crunchifyList4.get(i);
+            System.out.println(i + "iteration");
+
+            if (element.contains("me")) {
+                System.out.println(phrase);
+            }
+            if (element.equals("orange")) {
+                System.out.println("orange");
+            }
+            if (element.equalsIgnoreCase("Orange")) {
+                System.out.println("orange");
+            }
+            if (element.contains("i")) {
+                System.out.println("IIIII");
+            } else {
+                System.out.println("Bad loop");
+            }
+        }
+    }
+//}
+    /*Output
+    * apple, kiwi, orange, melon]
+0iteration
+Bad loop
+1iteration
+IIIII
+2iteration
+orange
+orange
+Bad loop
+3iteration
+melon is inside the list
+Bad loop*/
+
+    @Test
+    public void test6e() {
+        String phrase = "melon is inside the list";
+        List<String> crunchifyList4 = new ArrayList<>(Arrays.asList("apple", "kiwi",
+                "orange"));
+        crunchifyList4.add("melon");
+        System.out.println(crunchifyList4);
+        for (int i = 0; i < crunchifyList4.size(); i++) {
+            String element = crunchifyList4.get(i);
+            System.out.println(i + "iteration");
+
+            if (element.contains("me")) {
+                System.out.println(phrase);
+
+                continue;
+                //next part will be skipped
+                //becoause you add condtinue
+            }
+            if (element.equals("orange")) {
+                System.out.println("orange");
+            }
+            if (element.equalsIgnoreCase("Orange")) {
+                System.out.println("orange");
+            }
+            if (element.contains("i")) {
+                System.out.println("IIIII");
+            } else {
+                System.out.println("Bad loop");
+            }
+        }
+    }
+    //output
+    //[apple, kiwi, orange, melon]
+    //0iteration
+    //Bad loop
+    //1iteration
+    //IIIII
+    //2iteration
+    // orange
+    //orange
+    //Bad loop
+    //3iteration
+    //melon is inside the list
+
+    @Test
+    public void test6ee() {
+        String phrase = "melon is inside the list";
+        List<String> crunchifyList4 = new ArrayList<>(Arrays.asList("apple", "kiwi",
+                "orange"));
+        crunchifyList4.add("melon");
+        System.out.println(crunchifyList4);
+        for (int i = 0; i < crunchifyList4.size(); i++) {
+            String element = crunchifyList4.get(i);
+            System.out.println(i + "iteration");
+
+            if (element.contains("me")) {
+                System.out.println(phrase);
+
+                break;
+                //complited test
+                //becoause you add break
+            }
+            if (element.equals("orange")) {
+                System.out.println("orange");
+            }
+            if (element.equalsIgnoreCase("Orange")) {
+                System.out.println("orange");
+            }
+            if (element.contains("i")) {
+                System.out.println("IIIII");
+            } else {
+                System.out.println("Bad loop");
+            }
+        }
+    }
+//}
+//output
+//apple, kiwi, orange, melon]
+//        0iteration
+//        Bad loop
+//        1iteration
+//        IIIII
+//        2iteration
+//        orange
+//        orange
+//        Bad loop
+//        3iteration
+//        melon is inside the list
+//we created WebElements and collect all webElementsSSSSSSS it has special locators,
+// UL <====== means list and specific class/value and liiiiiiii => element of this list
+//    after that its created size of this list
+
+    // we have webelement and after we open webpage Selenium add aftomatialy inside yoour list
+    //this web element
+    @Test
+    public void test7() {
+        String expectedTitleHowWeWork = "Ukrainian women for marriage ";
+        //String expectedTitlePrittyWomen = "Ukrainian women for marriage";
+        //String expectedTitle = "Ukrainian women for marriage";
+        String expectedTitlePrettyWomen = "Single Ukrainian women online"; // add Single !!! as on the site
+        List<WebElement> links = driver.findElements(By.xpath("//ul[@class='navbar-nav']//li"));
+        System.out.println(links.size());
+
+        for (int i = 0; i < links.size(); i++) {
+            String info = links.get(i).getText();  // you seved on main page, so come back and veryfy 1 or second page
+            System.out.println(info + "  INFO1");
+            links.get(i).click();
+            //I need to comeback because from one page I go to another page
+            //but I dont't have element on another page, so I neeed to ccomw back
+
+            if (info.contains("WORK")) {
+
+                //String actualTitle = driver.findElement(By.xpath("//h1")).getText(); // if no data in h1 will fail!!!
+                String actualTitle = driver.findElement(By.xpath("//h1")).getTagName();//.
+                        //getText(); // if no data in h1 will fail!!!
+
+                Assert.assertEquals(expectedTitleHowWeWork, actualTitle);
+                //https://romanceabroad.com/content/view/how-it-works
+                System.out.println("here a line");
+                System.out.println(actualTitle + "actualTitle? ");
+//            }else { //type here like that is WRONG! because it checking WORK!!!
+//                Assert.fail("Title is wrong !!!"); //need to write:
+                //Assert.assertEquals(expectedTitle, actualTitle);
+                //}
+                if (info.contains("PRETTY WOMEN")) {
+                    String actualTitle2 = driver.findElement(By.xpath("//h1")).getText(); // if no data in h1 will fail!!!
+                    Assert.assertEquals(expectedTitleHowWeWork, actualTitle2);
+                    //System.out.println(expectedTitle);
+                    System.out.println(actualTitle2 + "actualTitle2?");
+
+                    driver.get(Data.MAIN_URL);
+                    //need to put new value in this List links, pull it out and add value in
+                    //and after eash iteration it will create new list
+                    links = driver.findElements(By.xpath("//ul[@class='navbar-nav']//li"));
+                }
+            }
+        }
+
+// how do I found typo, how can I do it?
+        //go to webside in the page how-it-works
+        //https://romanceabroad.com/content/view/how-it-works
+        //right click, inspect
+        //go ====>if (info. contains("WORK") )
+        //Ukrainian women for marriage
+    }}
+
+//8 last test filed
+//HOME
+//HOW WE WORK
+
+2.
+8
+HOME  INFO1
+HOW WE WORK  INFO1
+
+8
+HOME  INFO1
+HOW WE WORK  INFO1

@@ -1,0 +1,195 @@
+// forthe class 8 added BaseActions, MainPage, MediaPage, SearchPage, Storepage, ==
+//was before only Data, Locators
+//=================================================================
+//HW10 = what to do what to add
+1.Create 3 types of Conditions, ArrayLists (with String, int, WebElements).
+
+Example: if(i==3){action}
+
+2.Use booleans methods (is Displayed or isSelected) in conditions.
+
+3.Create 2 loops (with Strings and WebElements ArrayLists)
+
+4.Add hard (Assert.assertTrue, Assert.fail)  and soft assertions.
+
+
+
+Additional:
+
+1. Add these parts of code to your BeforeMethod, but don't forget about second part (your Main classes object, drivers and waits) and closed brackets.
+@BeforeMethod
+
+    @Parameters("browser")
+
+    public void setup(@Optional("chrome") String browser, Method method){
+
+
+
+        // Check if parameter passed from TestNG is 'firefox'
+
+        if (browser.equalsIgnoreCase("firefox")) {
+
+            // Create firefox instance
+
+            System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
+
+            driver = new FirefoxDriver();
+
+        }
+
+        // Check if parameter passed as 'chrome'
+
+        else if (browser.equalsIgnoreCase("chrome")) {
+
+            // Set path to chromedriver.exe
+
+            System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+
+            // Create chrome instance
+
+            driver = new ChromeDriver();
+
+            driver.get("chrome://settings/clearBrowserData");
+
+        } else if (browser.equalsIgnoreCase("IE")) {
+
+            System.setProperty("webdriver.ie.driver", "IEDriverServer.exe");
+
+            driver = new InternetExplorerDriver();
+
+            driver.manage().deleteAllCookies();
+
+
+
+        } else {
+
+            System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+
+            driver = new ChromeDriver();
+
+            driver.get("chrome://settings/clearBrowserData");
+
+ }
+
+
+
+2.Add these properties and builds to you pom.xml:
+
+
+
+<properties>
+
+        <maven.compiler.source>1.8</maven.compiler.source>
+
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <timestamp>${maven.build.timestamp}</timestamp>
+
+        <maven.build.timestamp.format>yyyy-MM-dd-HH-mm</maven.build.timestamp.format>
+
+        <surefire.reportplugin.version>3.0.0-M3</surefire.reportplugin.version>
+
+    </properties>
+
+
+
+    <build>
+
+        <plugins>
+
+            <plugin>
+
+                <groupId>org.apache.maven.plugins</groupId>
+
+                <artifactId>maven-compiler-plugin</artifactId>
+
+                <configuration>
+
+                    <source>8</source>
+
+                    <target>8</target>
+
+                </configuration>
+
+            </plugin>
+
+
+
+            <plugin>
+
+                <groupId>org.apache.maven.plugins</groupId>
+
+                <artifactId>maven-surefire-plugin</artifactId>
+
+                <version>3.0.0-M3</version>
+
+                <configuration>
+
+                    <suiteXmlFiles>
+
+                        <suiteXmlFile>TestNG.xml</suiteXmlFile>
+
+                    </suiteXmlFiles>
+
+                    <reportsDirectory>./test-output/${timestamp}</reportsDirectory>
+
+                </configuration>
+
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+
+
+
+
+3.Create TestNG.xml and add this structure of xml:
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="TestSuite" parallel="none" >
+
+<test name="IETestCases">
+
+ <parameter name="browser" value="ie"/>
+
+   <classes>
+
+         <class name ="RegistrationTests"/>
+
+         </classes>
+
+ </test>
+
+<test name="FirefoxTestCases">
+
+         <parameter name="browser" value="firefox"/>
+
+            <classes>
+
+ <class name ="RegistrationTests"/>
+
+        </classes>
+
+ </test>
+
+<test name="ChromeTestCases">
+
+     <parameter name="browser" value="chrome"/>
+
+         <classes>
+
+   <class name ="RegistrationTests"/>
+
+        </classes>
+
+ </test>
+
+</suite>
+
+Submit your assignment
+You may only submit one file with maximum 100 MB in size
